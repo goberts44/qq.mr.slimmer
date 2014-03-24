@@ -1,0 +1,38 @@
+apply plugin:'application'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+def sourceCompatibility = 1.6
+def title = 'MR Slimmer'
+def main = 'qq.mob.slimmer.SlimmerDriver'
+def version = '1.0.0'
+
+def localMavenRepo = 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath;
+def remoteMavenRepo = 'http://repo1.maven.org/maven2';
+
+jar {
+	manifest {
+		attributes 'Implementation-Title': title, 'Implementation-Version': version, 'Main-Class': main
+	}
+}
+
+repositories {
+		maven {url remoteMavenRepo}
+		maven {url localMavenRepo}
+}
+
+dependencies {
+	compile 'org.apache.hadoop:hadoop-client:2.3.0'
+	compile 'args4j:args4j:2.0.26'
+	compile 'commons-collections:commons-collections:3.2'
+	compile 'ch.qos.logback:logback-classic:1.1.1'
+	compile 'ch.qos.logback:logback-core:1.1.1'
+	testCompile 'junit:junit:4.+'
+}
+
+compileJava { source = file('src') }
+
+uploadArchives {
+	repositories { flatDir { dirs 'repos' } }
+}
