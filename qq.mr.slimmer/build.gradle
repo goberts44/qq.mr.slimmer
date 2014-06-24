@@ -11,6 +11,8 @@ def version = '1.0.0'
 def localMavenRepo = 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath;
 def remoteMavenRepo = 'http://repo1.maven.org/maven2';
 
+mainClassName = "qq.mob.slimmer.SlimmerDriver";
+
 jar {
 	manifest {
 		attributes 'Implementation-Title': title, 'Implementation-Version': version, 'Main-Class': main
